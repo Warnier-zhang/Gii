@@ -1,0 +1,13 @@
+{
+  "name": "gii",
+  "authors": [
+    "Warnier-zhang<warnier.zhang@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "Apache-2.0",
+  "homepage": "",
+  "dependencies": {
+    "bootstrap": "3.3.7"
+  }
+}
