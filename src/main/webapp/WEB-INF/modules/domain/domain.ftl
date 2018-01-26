@@ -82,6 +82,7 @@
         <#elseif generator.fileWrappers??>
             <div class="default-view-files">
                 <p>单击上面的<code>生成</code>按钮来保存选中的文件：</p>
+                <!--
                 <div class="row form-group">
                     <div class="col-xs-6">
                         <input id="filter-input" class="form-control" placeholder="过滤">
@@ -100,6 +101,7 @@
                         </label>
                     </div>
                 </div>
+                -->
             </div>
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
