@@ -2,7 +2,7 @@
 <div class="default-view">
     <h1>${generator.name}生成器</h1>
     <p>${generator.hint}</p>
-    <form id="domain-generator" action="base!renderGenerator?id=${generator.id!''}" method="post"
+    <form id="domain-generator" action="gii!renderGenerator?id=${generator.id!''}" method="post"
           onsubmit="return promptToPreview();">
         <div class="row">
             <div class="col-lg-8 col-md-10">
