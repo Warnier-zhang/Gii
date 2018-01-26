@@ -130,4 +130,14 @@ public class StringUtils {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 转换NULL值为“”；
+     *
+     * @param text
+     * @return
+     */
+    public static String wrapNull(String text) {
+        return text == null ? "" : text;
+    }
 }
