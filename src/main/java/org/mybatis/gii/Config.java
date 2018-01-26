@@ -12,7 +12,7 @@ public class Config {
     /**
      * 类文件路径；
      */
-    public static final String CLS_BASE = "WEB-INF/classes";
+    public static final String CLS_BASE = "target/classes";
 
     /**
      * 配置文件；
@@ -36,10 +36,10 @@ public class Config {
 
     static {
         // Config类绝对路径；
-        String path = Config.class.getClassLoader().getResource("/").getPath();
+//        String path = Config.class.getClassLoader().getResource("/").getPath();
 
         // 项目根目录；
-        APP_BASE = path.substring(0, path.indexOf(CLS_BASE));
+//        APP_BASE = path.substring(0, path.indexOf(CLS_BASE));
 
         // MyBatis 3 JDBC类型；
         JDBCTYPES = new HashMap<String, String>();
