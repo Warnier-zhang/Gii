@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.gii.mapper.SchemaMapper">
+    <!-- 查询当前用户下的所有表及其注释 -->
+    <select id="getTables" resultType="map">
+        SELECT
+            t.table_name,
+            table_type,
+            comments
+        FROM user_tables t, user_tab_comments c
+        WHERE t.status = 'VALID' AND t.table_name = c.table_name
+        ORDER BY t.table_name
+    </select>
+
+    <!-- 查询某个表下的所有字段及其注释 -->
+    <select id="getTableColumns" resultType="map">
+        SELECT
+            column_id,
+            n.table_name,
+            n.column_name,
+            data_type,
+            data_precision,
+            data_scale,
+            nullable,
+            data_default,
+            comments
+        FROM user_tab_columns n, user_col_comments c
+        WHERE n.table_name = #{tableName, jdbcType=VARCHAR} AND n.table_name = c.table_name AND n.column_name = c.column_name
+        ORDER BY n.column_id
+    </select>
+</mapper>
