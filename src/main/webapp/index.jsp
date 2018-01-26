@@ -4,7 +4,7 @@
     <title>Welcome to Gii!</title>
     <script type="text/javascript">
         // 跳转到首页
-        parent.location.href = "base!renderIndexPage";
+        parent.location.href = "gii!renderIndexPage";
     </script>
 </head>
 <body>

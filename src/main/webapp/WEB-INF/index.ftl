@@ -9,7 +9,7 @@
             <div class="generator col-lg-4">
                 <h3>${generator.name}生成器</h3>
                 <p>${generator.hint}</p>
-                <p><a class="btn btn-default" href="base!renderGenerator?id=${generator.id}">生成${generator.name}</a></p>
+                <p><a class="btn btn-default" href="gii!renderGenerator?id=${generator.id}">生成${generator.name}</a></p>
             </div>
         </#list>
     </div>

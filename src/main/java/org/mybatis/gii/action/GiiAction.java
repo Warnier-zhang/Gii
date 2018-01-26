@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BaseAction extends ActionSupport implements Preparable {
+public class GiiAction extends ActionSupport implements Preparable {
     @Getter
     @Setter
     private String id;

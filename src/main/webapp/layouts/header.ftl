@@ -30,7 +30,7 @@
             </div>
             <div id="w0-collapse" class="collapse navbar-collapse">
                 <ul id="w1" class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="base!renderIndexPage">首页</a></li>
+                    <li class="active"><a href="gii!renderIndexPage">首页</a></li>
                     <li><a href="https://github.com/Warnier-zhang/Gii/blob/master/README.md">文档</a></li>
                     <li><a href="https://github.com/Warnier-zhang/Gii/issues">帮助</a></li>
                 </ul>
