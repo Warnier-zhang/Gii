@@ -23,7 +23,7 @@
                     <label for="packageName">包名</label>
                     <input type="text" id="packageName" class="form-control domain-widget required"
                            name="generator.packageName"
-                           value="${generator.packageName!''}" widgetName="包名" widgetType="1">
+                           value="${generator.packageName!''}" widgetName="包名" widgetType="1" readonly="readonly"/>
                 </div>
                 <div class="form-group">
                     <label>
@@ -106,7 +106,7 @@
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" id="check-all"></th>
+                        <th></th>
                         <th class="file">源文件</th>
                         <th class="action">操作</th>
                     </tr>
@@ -125,7 +125,7 @@
                                 &nbsp;
                             <#else>
                                 <input type="checkbox" name="fileWrapper.id" value="${fileWrapper.id}"
-                                       checked="checked"/>
+                                       checked="checked" disabled="disabled"/>
                             </#if>
                         </td>
                         <td class="file">
