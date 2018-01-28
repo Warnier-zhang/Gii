@@ -69,8 +69,12 @@ public class DomainGenerator extends Generator {
 
         // 解析预定义参数；
         this.options = buildOptions(new String[]{
+                // 启用注解；
                 "gii.cfg.domain.addAnnotation",
-                "gii.cfg.domain.enableComment"
+                // 添加注释；
+                "gii.cfg.domain.enableComment",
+                // 转换BOLB；
+                "gii.cfg.domain.convertBinary"
         });
 
         // 获得IoC容器中的DomainGenerator实例；

@@ -241,6 +241,15 @@ public abstract class Generator {
                 if (!imports.contains("java.util.Date")) {
                     imports.add("java.util.Date");
                 }
+            } else if (property.get("type").equals("byte[]")) {
+                if (options.containsKey("convertBinary") && options.get("convertBinary").equals("1")) {
+                    if (!imports.contains("org.apache.struts2.json.annotations.JSON")) {
+                        imports.add("org.apache.struts2.json.annotations.JSON");
+                    }
+                    if (!imports.contains("java.io.UnsupportedEncodingException")) {
+                        imports.add("java.io.UnsupportedEncodingException");
+                    }
+                }
             }
         }
         return imports;

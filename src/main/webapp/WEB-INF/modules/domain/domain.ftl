@@ -27,6 +27,20 @@
                 </div>
                 <div class="form-group">
                     <label>
+                        <input type="hidden" name="generator.options.convertBinary"/>
+                        <#if generator.options.convertBinary == "1">
+                            <input type="checkbox" class="domain-widget required"
+                                   id="convertBinary" name="convertBinary"
+                                   value="1" widgetType="2" widgetFlag="convertBinary" checked="checked"/>是否自动把BLOB类型数据转换成普通字符文本
+                        <#else>
+                            <input type="checkbox" class="domain-widget required"
+                                   id="convertBinary" name="convertBinary"
+                                   value="1" widgetType="2" widgetFlag="convertBinary"/>是否自动把BLOB类型数据转换成普通字符文本
+                        </#if>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
                         <input type="hidden" name="generator.options.addAnnotation"/>
                         <#if generator.options.addAnnotation == "1">
                             <input type="checkbox" class="domain-widget required"
