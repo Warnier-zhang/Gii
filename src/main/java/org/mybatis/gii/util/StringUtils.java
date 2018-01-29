@@ -55,6 +55,15 @@ public class StringUtils {
     }
 
     /**
+     * 首字母小写。
+     *
+     * @return
+     */
+    public static String lowerCase(String text) {
+        return text.substring(0, 1).toLowerCase() + text.substring(1);
+    }
+
+    /**
      * 把以下划线（_）等分割的单词转成符合驼峰命名规则的字符串。
      *
      * @param text
