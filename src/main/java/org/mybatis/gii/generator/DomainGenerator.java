@@ -82,8 +82,37 @@ public class DomainGenerator extends Generator {
     }
 
     @Override
-    protected List<FileWrapper> wrapFiles() {
-        List<FileWrapper> fileWrappers = new ArrayList<FileWrapper>();
+    public void generate() {
+        // 检查表名或者类名是否为空；
+        if (StringUtils.isEmpty(tableName) || StringUtils.isEmpty(className)) {
+            results = new ArrayList<Map<String, String>>();
+
+            Map<String, String> result = new HashMap<String, String>();
+            result.put("code", "0");
+            if (StringUtils.isEmpty(tableName)) {
+                result.put("info", "没有选择表，请重试！");
+            } else {
+                result.put("info", "类名为空值，请重试！");
+            }
+            results.add(result);
+            return;
+        }
+
+        // 获取表中的字段；
+        List<Map<String, Object>> columns = schemaService.getTableColumns(tableName);
+        if (columns == null || columns.size() == 0) {
+            results = new ArrayList<Map<String, String>>();
+
+            Map<String, String> result = new HashMap<String, String>();
+            result.put("code", "0");
+            result.put("info", "表中没有字段，选择的表无效，请重试！");
+            results.add(result);
+            return;
+        }
+
+        this.columns = buildColumns(columns);
+        this.properties = buildProperties(columns);
+        this.imports = buildImports(this.options, this.properties);
 
         // 构建数据模型；
         Map<String, Object> root = new HashMap<String, Object>();
@@ -95,12 +124,12 @@ public class DomainGenerator extends Generator {
         root.put("properties", properties);
         root.put("options", options);
 
-        // 构建文件参数；
+        // 构建代码文件；
         String fileName = className + ".java";
         String filePath = absoluteURL + File.separator + fileName;
         String fileBody = renderText(template, root);
+        fileWrappers = new ArrayList<FileWrapper>();
         fileWrappers.add(new FileWrapper(fileName, filePath, fileBody));
-        return fileWrappers;
     }
 
     /**

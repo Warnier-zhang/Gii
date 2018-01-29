@@ -5,8 +5,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 @Component
 public class MapperGenerator extends Generator {
@@ -73,8 +71,8 @@ public class MapperGenerator extends Generator {
     }
 
     @Override
-    protected List<FileWrapper> wrapFiles() {
-        return null;
+    public void generate() {
+
     }
 
     /**

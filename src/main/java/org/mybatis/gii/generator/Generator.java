@@ -9,13 +9,9 @@ import org.mybatis.gii.service.SchemaService;
 import org.mybatis.gii.util.PropertiesLoader;
 import org.mybatis.gii.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.*;
@@ -159,48 +155,9 @@ public abstract class Generator {
     }
 
     /**
-     * 生成源文件。
+     * 生成源文件。Generator子类必须重写该方法！
      */
-    public void generate() {
-        // 检查表名或者类名是否为空；
-        if (StringUtils.isEmpty(tableName) || StringUtils.isEmpty(className)) {
-            results = new ArrayList<Map<String, String>>();
-            Map<String, String> result = new HashMap<String, String>();
-            result.put("code", "0");
-            if (StringUtils.isEmpty(tableName)) {
-                result.put("info", "没有选择表，请重试！");
-            } else {
-                result.put("info", "类名为空值，请重试！");
-            }
-            results.add(result);
-            return;
-        }
-
-        // 获取表中的字段；
-        List<Map<String, Object>> columns = schemaService.getTableColumns(tableName);
-        if (columns == null || columns.size() == 0) {
-            results = new ArrayList<Map<String, String>>();
-            Map<String, String> result = new HashMap<String, String>();
-            result.put("code", "0");
-            result.put("info", "表中没有字段，选择的表无效，请重试！");
-            results.add(result);
-            return;
-        }
-
-        this.columns = buildColumns(columns);
-        this.properties = buildProperties(columns);
-        this.imports = buildImports(this.options, this.properties);
-
-        // 封装源文件；
-        this.fileWrappers = wrapFiles();
-    }
-
-    /**
-     * 封装源文件。Generator子类必须重写此方法！
-     *
-     * @return
-     */
-    protected abstract List<FileWrapper> wrapFiles();
+    public abstract void generate();
 
     /**
      * 转换表中字段。
@@ -322,7 +279,7 @@ public abstract class Generator {
      * @param scale      字段精度；
      * @return
      */
-    protected String parseJavaType(String columnType, String scale) {
+    private String parseJavaType(String columnType, String scale) {
         if (columnType.equals("NUMBER")) {
             if (StringUtils.isEmpty(scale) || scale.equals("0")) {
                 scale = "0";
@@ -341,7 +298,7 @@ public abstract class Generator {
      * @param columnType 字段类型；
      * @return
      */
-    protected String parseJdbcType(String columnType) {
+    private String parseJdbcType(String columnType) {
         return JDBCTYPES.containsKey(columnType) ? JDBCTYPES.get(columnType) : "VARCHAR";
     }
 
