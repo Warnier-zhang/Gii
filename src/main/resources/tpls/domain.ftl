@@ -76,8 +76,10 @@ public class ${className} {
         this.string${property.setter?substring(3)} = string${property.setter?substring(3)};
     }
     </#if>
+    <#if options.addAnnotation == "0">
     <#if property_has_next>
 
+    </#if>
     </#if>
     </#list>
 }
