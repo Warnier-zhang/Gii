@@ -5,74 +5,100 @@
 <div class="default-view">
     <h1>${generator.name}生成器</h1>
     <p>${generator.hint}</p>
-    <form id="domain-generator" action="gii!renderGenerator" method="post" onsubmit="return promptToPreview();">
+    <form id="domain-generator" action="gii!renderGenerator?id=${generator.id!''}" method="post"
+          onsubmit="return promptToPreview();">
         <div class="row">
             <div class="col-lg-8 col-md-10">
-                <div class="form-group" style="display: none">
-                    <label for="id">ID</label>
-                    <input type="hidden" name="id" value="${generator.id}" class="form-control"/>
-                </div>
                 <div class="form-group">
                     <label for="tableName">表名</label>
-                    <input type="text" id="tableName" name="generatorWrapper.tableName"
+                    <input type="text" id="tableName" name="generator.tableName"
                            class="form-control typeahead domain-widget required" widgetName="表名" widgetType="3"
                            autocomplete="off" value="${generator.tableName!''}"
-                           spellcheck="false" onchange="fillClassName();"/>
+                           spellcheck="false" onchange="getClassName();"/>
                 </div>
                 <div class="form-group">
                     <label for="className">类名</label>
-                    <input type="text" id="className" name="generatorWrapper.className" class="form-control domain-widget required"
+                    <input type="text" id="className" name="generator.className"
+                           class="form-control domain-widget required"
                            widgetName="类名" widgetType="1" value="${generator.className!''}"/>
                 </div>
                 <div class="form-group">
                     <label for="packageName">包名</label>
-                    <input type="text" id="packageName" class="form-control domain-widget required" name="generatorWrapper.packageName"
-                           value="${generator.packageName!''}" widgetName="包名" widgetType="1">
+                    <input type="text" id="packageName" class="form-control domain-widget required"
+                           name="generator.packageName"
+                           value="${generator.packageName!''}" widgetName="包名" widgetType="1" readonly="readonly"/>
                 </div>
                 <div class="form-group">
                     <label>
-                        <#if generator.mapXMLFile = "1">
-                            <input type="checkbox" id="mapXMLFile" class="domain-widget required" name="generatorWrapper.mapXMLFile"
-                                   value="1" widgetType="2" checked="checked"/>同时生成XML文件
+                        <input type="hidden" name="generator.options.generateQuery"/>
+                        <#if generator.options.generateQuery == "1">
+                            <input type="checkbox" class="domain-widget required"
+                                   id="generateQuery" name="generateQuery"
+                                   value="1" widgetType="2" widgetFlag="generateQuery" checked="checked"/>是否同时生成Mapper映射文件
                         <#else>
-                            <input type="checkbox" id="mapXMLFile" class="domain-widget required" name="generatorWrapper.mapXMLFile"
-                                   value="1" widgetType="2"/>同时生成XML文件
+                            <input type="checkbox" class="domain-widget required"
+                                   id="generateQuery" name="generateQuery"
+                                   value="1" widgetType="2" widgetFlag="generateQuery"/>是否同时生成Mapper映射文件
                         </#if>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
-                        <#if generator.implMapper = "1">
-                            <input type="checkbox" id="implMapper" class="domain-widget required" name="generatorWrapper.implMapper"
-                                   value="1" widgetType="2" checked="checked"/>扩展自Mapper接口
+                        <input type="hidden" name="generator.options.extendsMapper"/>
+                        <#if generator.options.extendsMapper == "1">
+                            <input type="checkbox" class="domain-widget required"
+                                   id="extendsMapper" name="extendsMapper"
+                                   value="1" widgetType="2" widgetFlag="extendsMapper" checked="checked"/>是否扩展<a href="#">Mapper</a>接口
                         <#else>
-                            <input type="checkbox" id="implMapper" class="domain-widget required" name="generatorWrapper.implMapper"
-                                   value="1" widgetType="2"/>添加Property注释
+                            <input type="checkbox" class="domain-widget required"
+                                   id="extendsMapper" name="extendsMapper"
+                                   value="1" widgetType="2" widgetFlag="extendsMapper"/>是否扩展<a href="#">Mapper</a>接口
                         </#if>
                     </label>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="generatorWrapper.actionFlag" value="preview">
+                    <button type="submit" class="btn btn-primary" name="generator.action" value="preview">
                         预览
                     </button>
-                    <#if generator.fileWrapper??>
-                    <button type="submit" class="btn btn-success" name="generatorWrapper.actionFlag" value="generate">
+                    <#if generator.fileWrappers??>
+                    <button type="submit" class="btn btn-success" name="generator.action" value="generate">
                         生成
                     </button>
                     </#if>
                 </div>
             </div>
         </div>
+        <!-- 显示生成结果 -->
+        <#if generator.results??>
+            <div class="default-view-results">
+                <#list generator.results as result>
+                    <#assign i=result_index>
+                    <#if result.code == "0">
+                        <div class="alert alert-danger">生成失败！请查看详细的错误日志！</div>
+                        <#break>
+                    </#if>
+                </#list>
+                <#if generator.results?size == (i + 1)>
+                    <div class="alert alert-success">生成成功！</div>
+                </#if>
+                <pre>
+                    <#list generator.results as result>
+                        ${result.info!""}<br/>
+                    </#list>
+                </pre>
+            </div>
         <!-- 显示预览结果 -->
-        <#if generator.fileWrapper??>
+        <#elseif generator.fileWrappers??>
             <div class="default-view-files">
                 <p>单击上面的<code>生成</code>按钮来保存选中的文件：</p>
+                <!--
                 <div class="row form-group">
                     <div class="col-xs-6">
                         <input id="filter-input" class="form-control" placeholder="过滤">
                     </div>
                     <div class="col-xs-6 text-right">
-                        <div id="action-toggle" class="btn-group btn-group-xs"">
+                        <div id="action-toggle" class="btn-group btn-group-xs"
+                        ">
                         <label class="btn btn-success active">
                             <input type="checkbox" value="新建" checked> 新建
                         </label>
@@ -84,45 +110,44 @@
                         </label>
                     </div>
                 </div>
+                -->
             </div>
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" id="check-all"></th>
+                        <th></th>
                         <th class="file">源文件</th>
                         <th class="action">操作</th>
                     </tr>
                     </thead>
                     <tbody id="files-body">
-                    <#if generator.fileWrapper.fileFlag == "新建">
+                    <#list generator.fileWrappers as fileWrapper>
+                        <#if fileWrapper.fileFlag == "新建">
                         <tr class="success">
-                    <#elseif generator.fileWrapper.fileFlag == "替换">
+                        <#elseif fileWrapper.fileFlag == "替换">
                         <tr class="warning">
-                    <#else>
+                        <#else>
                         <tr class="active">
-                    </#if>
+                        </#if>
                         <td class="check">
-                            <#if generator.fileWrapper.fileFlag == "跳过">
+                            <#if fileWrapper.fileFlag == "跳过">
                                 &nbsp;
                             <#else>
-                                <input type="checkbox" name="fileWrapper.id" value="${generator.fileWrapper.id}" checked="checked"/>
+                                <input type="checkbox" name="fileWrapper.id" value="${fileWrapper.id}"
+                                       checked="checked" disabled="disabled"/>
                             </#if>
                         </td>
                         <td class="file">
-                            <a id="${generator.fileWrapper.id}" class="preview-code" href="#">${generator.fileWrapper.filePath}</a>
+                            <a id="${fileWrapper.id}" class="preview-code"
+                               href="#">${fileWrapper.filePath}</a>
                         </td>
                         <td class="action">
-                            ${generator.fileWrapper.fileFlag}
+                            ${fileWrapper.fileFlag}
                         </td>
                     </tr>
+                    </#list>
                     </tbody>
                 </table>
-            </div>
-        </#if>
-        <!-- 显示生成结果 -->
-        <#if generator.result??>
-            <div class="default-view-results">
-                <pre>${generator.result.info!""}</pre>
             </div>
         </#if>
     </form>
@@ -172,7 +197,7 @@
     /**
      * 填充相应的类名
      */
-    function fillClassName() {
+    function getClassName() {
         var tableName = $("#tableName").typeahead("val");
         var className = engine.get([tableName])[0].className + "Mapper";
         $("#className").val(className);
@@ -189,6 +214,7 @@
             var widgetType = widget.attr("widgetType");
             var widgetData;
             var widgetName;
+            var widgetFlag;
             if (widgetType == 1) {
                 // 文本框
                 widgetName = widget.attr("widgetName");
@@ -206,6 +232,8 @@
                 } else {
                     widgetData = 0;
                 }
+                widgetFlag = widget.attr("widgetFlag");
+                $("input[type='hidden'][name='generator.options." + widgetFlag + "']").val(widgetData);
             } else if (widgetType == 3) {
                 // 自动补全控件
                 widgetName = widget.attr("widgetName");

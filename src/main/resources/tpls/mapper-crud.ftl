@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.mybatis.gii.mapper.SchemaMapper">
+<mapper namespace="org.mybatis.gii.mapper.${className}">
     <!-- 查询一条记录 -->
-    <select id="queryOne" resultType="${className?substring(0, className?index_of("Mapper"))}">
-        SELECT * FROM ${tableName} WHERE ${tableName}.${columns[0]} = ${properties[0].name}
+    <select id="queryOne" resultType="${domainClassName}">
+        SELECT * FROM ${tableName} WHERE ${tableName}.${columns[0]} = ${r"#{"}${properties[0].name}, jdbcType=${properties[0].jdbcType}}
     </select>
 
     <!-- 查询所有记录 -->
-    <select id="queryAll" resultType="${className?substring(0, className?index_of("Mapper"))}">
+    <select id="queryAll" resultType="${domainClassName}">
         SELECT * FROM ${tableName}
     </select>
 
