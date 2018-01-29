@@ -89,7 +89,7 @@ public class FileWrapper {
         // 检查是否跳过生成步骤；
         if (fileFlag.equals(FLAG_OP_SKIP)) {
             result.put("code", "1");
-            result.put("info", fileName + "文件的内容没有变化，已跳过改文件，无需重复生成！");
+            result.put("info", fileName + "文件的内容没有变化，已跳过该文件，无需重复生成！");
             return result;
         }
 
