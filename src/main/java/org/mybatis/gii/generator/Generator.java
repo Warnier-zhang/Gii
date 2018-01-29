@@ -344,6 +344,15 @@ public abstract class Generator {
             } else if (this.action.equals("preview")) {
                 this.results = null;
             }
+        }else{
+            this.imports = null;
+            this.className = null;
+            this.properties = null;
+            this.tableName = null;
+            this.columns = null;
+            this.fileWrappers = null;
+            this.action = null;
+            this.results = null;
         }
     }
 }

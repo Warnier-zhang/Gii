@@ -62,6 +62,17 @@ public class GiiAction extends ActionSupport implements Preparable {
     }
 
     /**
+     * 解析HTTP请求请求参数。
+     *
+     * @param name 参数名称；
+     * @return
+     */
+    private String getParameter(String name) {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        return request.getParameter(name);
+    }
+
+    /**
      * 显示首页。
      *
      * @return
@@ -92,21 +103,11 @@ public class GiiAction extends ActionSupport implements Preparable {
                 }
                 generator.setResults(results);
             }
-            generator.clear();
         }
+
+        // 清空用户输入；
+        generator.clear();
         return generator.getPage();
-    }
-
-
-    /**
-     * 解析HTTP请求请求参数。
-     *
-     * @param name 参数名称；
-     * @return
-     */
-    private String getParameter(String name) {
-        HttpServletRequest request = ServletActionContext.getRequest();
-        return request.getParameter(name);
     }
 
     /**
