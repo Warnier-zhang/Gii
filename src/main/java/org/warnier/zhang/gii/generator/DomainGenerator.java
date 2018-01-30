@@ -1,6 +1,6 @@
-package org.mybatis.gii.generator;
+package org.warnier.zhang.gii.generator;
 
-import org.mybatis.gii.util.StringUtils;
+import org.warnier.zhang.gii.util.StringUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ public class DomainGenerator extends Generator {
     /**
      * 默认的包名；
      */
-    public static final String PKG_DOMAIN_NAME = "org.mybatis.gii.domain";
+    public static final String PKG_DOMAIN_NAME = "org.warnier.zhang.gii.domain";
 
     /**
      * DOMAIN类生成器实例；

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.mybatis.gii.mapper.${className}">
+<mapper namespace="org.warnier.zhang.gii.mapper.${className}">
     <!-- 查询一条记录 -->
     <select id="queryOne" resultType="${domainClassName}">
         SELECT * FROM ${tableName} WHERE ${tableName}.${columns[0]} = ${r"#{"}${properties[0].name}, jdbcType=${properties[0].jdbcType}}

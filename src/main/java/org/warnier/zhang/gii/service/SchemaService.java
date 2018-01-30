@@ -1,4 +1,4 @@
-package org.mybatis.gii.service;
+package org.warnier.zhang.gii.service;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.mybatis.gii;
+package org.warnier.zhang.gii;
 
 import java.util.HashMap;
 import java.util.Map;

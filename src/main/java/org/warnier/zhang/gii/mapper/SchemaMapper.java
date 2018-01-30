@@ -1,4 +1,4 @@
-package org.mybatis.gii.mapper;
+package org.warnier.zhang.gii.mapper;
 
 import java.util.List;
 import java.util.Map;

@@ -1,22 +1,21 @@
-package org.mybatis.gii.generator;
+package org.warnier.zhang.gii.generator;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.Getter;
 import lombok.Setter;
-import org.mybatis.gii.service.SchemaService;
-import org.mybatis.gii.util.PropertiesLoader;
-import org.mybatis.gii.util.StringUtils;
+import org.warnier.zhang.gii.service.SchemaService;
+import org.warnier.zhang.gii.util.PropertiesLoader;
+import org.warnier.zhang.gii.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.warnier.zhang.gii.Config;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.*;
-
-import static org.mybatis.gii.Config.*;
 
 /**
  * 生成器基类。
@@ -151,7 +150,7 @@ public abstract class Generator {
     @PostConstruct
     protected void init() {
         // 加载配置文件、预定义值；
-        cfgs = PropertiesLoader.load(CFG_NAME);
+        cfgs = PropertiesLoader.load(Config.CFG_NAME);
     }
 
     /**
@@ -289,7 +288,7 @@ public abstract class Generator {
         } else {
             scale = "0";
         }
-        return JAVATYPES.containsKey(columnType + "-" + scale) ? JAVATYPES.get(columnType + "-" + scale) : "String";
+        return Config.JAVATYPES.containsKey(columnType + "-" + scale) ? Config.JAVATYPES.get(columnType + "-" + scale) : "String";
     }
 
     /**
@@ -299,7 +298,7 @@ public abstract class Generator {
      * @return
      */
     private String parseJdbcType(String columnType) {
-        return JDBCTYPES.containsKey(columnType) ? JDBCTYPES.get(columnType) : "VARCHAR";
+        return Config.JDBCTYPES.containsKey(columnType) ? Config.JDBCTYPES.get(columnType) : "VARCHAR";
     }
 
     /**
@@ -313,7 +312,7 @@ public abstract class Generator {
         String text;
         Configuration cfg = new Configuration();
         try {
-            cfg.setClassForTemplateLoading(getClass(), TPL_PATH);
+            cfg.setClassForTemplateLoading(getClass(), Config.TPL_PATH);
             Template tpl = cfg.getTemplate(templateName);
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             tpl.process(root, new OutputStreamWriter(out));

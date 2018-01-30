@@ -1,4 +1,4 @@
-package org.mybatis.gii.util;
+package org.warnier.zhang.gii.util;
 
 import difflib.DiffRow;
 import difflib.DiffRowGenerator;

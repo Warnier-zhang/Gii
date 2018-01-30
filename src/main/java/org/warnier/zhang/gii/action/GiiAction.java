@@ -1,15 +1,14 @@
-package org.mybatis.gii.action;
+package org.warnier.zhang.gii.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.struts2.ServletActionContext;
-import org.mybatis.gii.generator.DomainGenerator;
-import org.mybatis.gii.generator.FileWrapper;
-import org.mybatis.gii.generator.Generator;
-import org.mybatis.gii.generator.MapperGenerator;
+import org.warnier.zhang.gii.generator.DomainGenerator;
+import org.warnier.zhang.gii.generator.FileWrapper;
+import org.warnier.zhang.gii.generator.Generator;
+import org.warnier.zhang.gii.generator.MapperGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

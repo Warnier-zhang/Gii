@@ -14,7 +14,7 @@
        http://mybatis.org/schema/mybatis-spring
        http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="org.mybatis.gii"/>
+    <context:component-scan base-package="org.warnier.zhang.gii"/>
 
     <context:property-placeholder location="classpath*:gii.properties"/>
 
@@ -27,16 +27,16 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="org.mybatis.gii.domain"/>
+        <property name="typeAliasesPackage" value="org.warnier.zhang.gii.domain"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath*:org/mybatis/gii/mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath*:org/warnier/zhang/gii/mapper/*.xml"/>
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-    <mybatis:scan base-package="org.mybatis.gii.mapper"/>
+    <mybatis:scan base-package="org.warnier.zhang.gii.mapper"/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

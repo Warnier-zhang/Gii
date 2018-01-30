@@ -1,8 +1,8 @@
-package org.mybatis.gii.generator;
+package org.warnier.zhang.gii.generator;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.mybatis.gii.util.StringUtils;
+import org.warnier.zhang.gii.util.StringUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.mybatis.gii.generator.DomainGenerator.PKG_DOMAIN_NAME;
 
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 @Component
@@ -36,7 +34,7 @@ public class MapperGenerator extends Generator {
     /**
      * 默认的包名；
      */
-    public static final String PKG_MAPPER_NAME = "org.mybatis.gii.mapper";
+    public static final String PKG_MAPPER_NAME = "org.warnier.zhang.gii.mapper";
 
     /**
      * MAPPER类生成器实例；
@@ -96,7 +94,7 @@ public class MapperGenerator extends Generator {
         }
         this.domainPackageName = cfgs.getProperty("gii.pkg.domain.packageName");
         if (StringUtils.isEmpty(domainPackageName)) {
-            this.packageName = PKG_DOMAIN_NAME;
+            this.packageName = DomainGenerator.PKG_DOMAIN_NAME;
         }
 
         // 模板；

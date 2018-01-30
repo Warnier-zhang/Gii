@@ -1,8 +1,8 @@
-package org.mybatis.gii.service.impl;
+package org.warnier.zhang.gii.service.impl;
 
-import org.mybatis.gii.mapper.SchemaMapper;
-import org.mybatis.gii.service.SchemaService;
-import org.mybatis.gii.util.StringUtils;
+import org.warnier.zhang.gii.mapper.SchemaMapper;
+import org.warnier.zhang.gii.service.SchemaService;
+import org.warnier.zhang.gii.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

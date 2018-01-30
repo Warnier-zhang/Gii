@@ -1,9 +1,9 @@
-package org.mybatis.gii.generator;
+package org.warnier.zhang.gii.generator;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FileUtils;
-import org.mybatis.gii.util.StringUtils;
+import org.warnier.zhang.gii.util.StringUtils;
 
 import java.io.File;
 import java.io.FileWriter;
