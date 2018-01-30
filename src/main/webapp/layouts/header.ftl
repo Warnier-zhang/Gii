@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Gii!</title>
     <!-- 加载样式文件 -->
-    <link type="text/css" rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="./css/style.css">
+    <link type="text/css" rel="stylesheet" href="static/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 <!-- 加载脚本文件 -->
-<script type="text/javascript" src="./lib/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./lib/typeahead.js/dist/typeahead.bundle.min.js"></script>
+<script type="text/javascript" src="static/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/lib/typeahead.js/dist/typeahead.bundle.min.js"></script>
 <div class="container-fluid page-container">
     <!-- 导航栏 -->
     <nav id="w0" class="navbar-inverse navbar-fixed-top navbar">
@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="./img/logo.png" alt="">
+                    <img src="static/img/logo.png" alt="">
                 </a>
             </div>
             <div id="w0-collapse" class="collapse navbar-collapse">
