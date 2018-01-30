@@ -8,9 +8,9 @@
     <package name="gii-page-default" namespace="/" extends="struts-default">
         <!-- 首页 -->
         <action name="gii" class="org.warnier.zhang.gii.action.GiiAction">
-            <result name="indexPage" type="freemarker">WEB-INF/index.ftl</result>
-            <result name="domainPage" type="freemarker">WEB-INF/modules/domain/domain.ftl</result>
-            <result name="mapperPage" type="freemarker">WEB-INF/modules/mapper/mapper.ftl</result>
+            <result name="indexPage" type="freemarker">static/index.ftl</result>
+            <result name="domainPage" type="freemarker">static/modules/domain/domain.ftl</result>
+            <result name="mapperPage" type="freemarker">static/modules/mapper/mapper.ftl</result>
         </action>
     </package>
 </struts>
