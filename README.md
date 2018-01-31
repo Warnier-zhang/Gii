@@ -84,6 +84,14 @@ gii.cfg.mapper.generateQuery=1
 gii.cfg.mapper.extendsMapper=1
 ```
 
+#### 5、测试
+
+访问：`http://<host>:<port>/<path>/gii!renderIndexPage`!
+
+演示视频
+======
+
+
 常见问题
 ======
 
