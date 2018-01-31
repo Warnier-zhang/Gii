@@ -151,7 +151,7 @@ gii.cfg.mapper.extendsMapper=1
 开发人员
 ======
 
-* [Warnier-zhang<warnier.zhang@gmail.com>](https://github.com/Warnier-zhang/)
+* [Warnier-zhang](https://github.com/Warnier-zhang/)
 
 [1]:https://github.com/yiisoft/yii2-gii
 [2]:https://github.com/mybatis/generator
