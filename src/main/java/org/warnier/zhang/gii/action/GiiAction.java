@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.Preparable;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.*;
 import org.warnier.zhang.gii.generator.DomainGenerator;
 import org.warnier.zhang.gii.generator.FileWrapper;
 import org.warnier.zhang.gii.generator.Generator;
@@ -15,6 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("gii")
+@ResultPath("/static")
+@Results({
+        @Result(name = "indexPage", type = "freemarker", location = "index.ftl"),
+        @Result(name = "domainPage", type = "freemarker", location = "modules/domain/domain.ftl"),
+        @Result(name = "mapperPage", type = "freemarker", location = "modules/mapper/mapper.ftl"),
+})
 public class GiiAction extends ActionSupport implements Preparable {
     @Getter
     @Setter

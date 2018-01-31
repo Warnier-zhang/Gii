@@ -28,8 +28,18 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="org.warnier.zhang.gii.domain"/>
+        <!--
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        -->
         <property name="mapperLocations" value="classpath*:org/warnier/zhang/gii/mapper/*.xml"/>
+        <!-- 配置参数 -->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="cacheEnabled" value="true"/>
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+                <property name="callSettersOnNulls" value="true"/>
+            </bean>
+        </property>
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
