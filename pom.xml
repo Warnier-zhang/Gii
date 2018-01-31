@@ -43,6 +43,12 @@
             <version>2.3.34</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-convention-plugin</artifactId>
+            <version>2.3.34</version>
+        </dependency>
+
         <!-- FreeMarker -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -205,8 +211,6 @@
                 <directory>src/main/resources</directory>
                 <excludes>
                     <exclude>struts.properties</exclude>
-                    <exclude>struts.xml</exclude>
-                    <exclude>mybatis-config.xml</exclude>
                     <exclude>gii.properties</exclude>
                 </excludes>
             </resource>
