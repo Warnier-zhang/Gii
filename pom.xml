@@ -4,7 +4,7 @@
     <groupId>org.warnier.zhang.gii</groupId>
     <artifactId>gii</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.0-alpha</version>
+    <version>1.1.1-alpha</version>
     <name>Gii</name>
     <description>Gii - Make it easier to generate boilerplate code for MyBatis 3 users.</description>
     <url>https://github.com/Warnier-zhang/Gii</url>
