@@ -18,15 +18,15 @@
 
     <context:property-placeholder location="classpath*:gii.properties"/>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource-gii" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${gii.dba.driverClassName}"/>
         <property name="url" value="${gii.dba.url}"/>
         <property name="username" value="${gii.dba.username}"/>
         <property name="password" value="${gii.dba.password}"/>
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="sqlSessionFactory-gii" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource-gii"/>
         <property name="typeAliasesPackage" value="org.warnier.zhang.gii.domain"/>
         <!--
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
@@ -42,15 +42,16 @@
         </property>
     </bean>
 
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    <bean id="sqlSession-gii" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory-gii"/>
     </bean>
 
-    <mybatis:scan base-package="org.warnier.zhang.gii.mapper"/>
+    <mybatis:scan base-package="org.warnier.zhang.gii.mapper" factory-ref="sqlSessionFactory-gii"
+                  template-ref="sqlSession-gii"/>
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="transactionManager-gii" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource-gii"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven transaction-manager="transactionManager-gii"/>
 </beans>
