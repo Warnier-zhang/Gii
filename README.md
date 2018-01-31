@@ -9,7 +9,7 @@ Gii是一个Web App，采用耳熟能详的SSM（Struts 2、Spring 3、MyBatis 3
 
 #### 1、安装gii.jar；
 
-安装方式非常简单，可以选择自己喜欢的下载工具从https://github.com/Warnier-zhang/Gii/releases处下载各个版本的jar文件，然后复制到当前项目的`WEB-INF/lib`目录即可！
+安装方式非常简单，可以选择自己喜欢的下载工具从https://github.com/Warnier-zhang/Gii/releases处下载各个版本的jar文件，然后复制到当前项目的`WEB-INF/lib`目录即可！除此之外，因为项目是基于SSM和FreeMarker搭建的，请查看[pom.xml][3]，检查是否缺少必需的依赖文件，若缺少，请自行补充。
 
 Maven用户可以参考下面的脚本把gii.jar安装到本地仓库：
 
