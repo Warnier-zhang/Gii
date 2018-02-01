@@ -95,7 +95,8 @@ gii.cfg.mapper.extendsMapper=1
 常见问题
 ======
 
-1. 选用Spring MVC而不是Struts 2的项目如何使用？
+1、选用Spring MVC而不是Struts 2的项目如何使用？
+
 目前情况下，Gii没有打包适合Spring MVC的jar文件以供下载，有需要的话请自行修改下面的`Resource`过滤脚本，并参考[pom.xml][3]导入必须的依赖文件。
 
 ```
@@ -126,6 +127,33 @@ gii.cfg.mapper.extendsMapper=1
 </resources>
 ```
 
+2、如何运行Gii项目？
+
+Gii本身就是一个Web App，当然可以打包成war文件，从而部署到Tomcat运行。具体的步骤如下：
+
+* 修改`packaging`属性的值为`war`;
+* 注释`src/main/resources`目录相关的资源过滤脚本，即：
+
+```
+<resources>
+    <!--
+    <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+            <exclude>struts.properties</exclude>
+            <exclude>gii.properties</exclude>
+        </excludes>
+    </resource>
+    -->
+
+    ...
+
+</resources>
+```
+
+* 运行`mvn clean tomcat7:run-war`命令；
+* 访问`http://localhost:8080/gii`地址；
+ 
 许可证书
 ======
 
