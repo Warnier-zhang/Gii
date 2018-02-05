@@ -125,6 +125,13 @@
             <version>11.2.0</version>
         </dependency>
 
+        <!-- MySQL JDBC Driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.45</version>
+        </dependency>
+
         <!-- Getter && Setter -->
         <dependency>
             <groupId>org.projectlombok</groupId>
