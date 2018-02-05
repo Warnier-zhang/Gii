@@ -4,7 +4,7 @@
     <groupId>org.warnier.zhang.gii</groupId>
     <artifactId>gii</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.1-alpha</version>
+    <version>1.2.0-beta</version>
     <name>Gii</name>
     <description>Gii - Make it easier to generate boilerplate code for MyBatis 3 users.</description>
     <url>https://github.com/Warnier-zhang/Gii</url>
@@ -22,6 +22,11 @@
             <email>warnier.zhang@gmail.com</email>
         </developer>
     </developers>
+    <scm>
+        <connection>scm:git@github.com:Warnier-zhang/Gii.git</connection>
+        <developerConnection>scm:git@github.com:Warnier-zhang/Gii.git</developerConnection>
+        <url>https://github.com/Warnier-zhang/Gii</url>
+    </scm>
 
     <dependencies>
         <!-- Struts 2 -->
