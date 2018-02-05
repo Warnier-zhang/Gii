@@ -25,6 +25,19 @@
         <property name="password" value="${gii.dba.password}"/>
     </bean>
 
+    <bean id="vendors" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="Oracle">oracle</prop>
+                <prop key="MySQL">mysql</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+        <property name="properties" ref="vendors"/>
+    </bean>
+
     <bean id="sqlSessionFactory-gii" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource-gii"/>
         <property name="typeAliasesPackage" value="org.warnier.zhang.gii.domain"/>
@@ -40,6 +53,8 @@
                 <property name="callSettersOnNulls" value="true"/>
             </bean>
         </property>
+        <!-- 支持多种数据库 -->
+        <property name="databaseIdProvider" ref="databaseIdProvider"/>
     </bean>
 
     <bean id="sqlSession-gii" class="org.mybatis.spring.SqlSessionTemplate">

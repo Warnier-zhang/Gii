@@ -2,31 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.warnier.zhang.gii.mapper.SchemaMapper">
+    <!-- Oracle -->
     <!-- 查询当前用户下的所有表及其注释 -->
-    <select id="getTables" resultType="map">
+    <select id="getTables" databaseId="oracle" resultType="map">
         SELECT
             t.table_name,
             table_type,
-            comments
+            comments table_comment,
+            'oracle' database_id
         FROM user_tables t, user_tab_comments c
         WHERE t.status = 'VALID' AND t.table_name = c.table_name
         ORDER BY t.table_name
     </select>
 
     <!-- 查询某个表下的所有字段及其注释 -->
-    <select id="getTableColumns" resultType="map">
+    <select id="getTableColumns" databaseId="oracle" resultType="map">
         SELECT
             column_id,
             n.table_name,
             n.column_name,
-            data_type,
-            data_precision,
-            data_scale,
-            nullable,
-            data_default,
-            comments
+            data_type column_type,
+            data_precision column_precision,
+            data_scale column_scale,
+            nullable is_nullable,
+            data_default column_default,
+            comments column_comment,
+            'oracle' database_id
         FROM user_tab_columns n, user_col_comments c
         WHERE n.table_name = #{tableName, jdbcType=VARCHAR} AND n.table_name = c.table_name AND n.column_name = c.column_name
         ORDER BY n.column_id
+    </select>
+
+    <!-- MySQL -->
+    <!-- 查询当前用户下的所有表及其注释 -->
+    <select id="getTables" databaseId="mysql" resultType="map">
+         SELECT
+             table_name,
+             table_type,
+             table_comment,
+             'mysql' database_id
+         FROM information_schema.tables
+         WHERE table_schema IN (
+            SELECT DATABASE() table_schema
+         )
+    </select>
+
+    <!-- 查询某个表下的所有字段及其注释 -->
+    <select id="getTableColumns" databaseId="mysql" resultType="map">
+        SELECT
+            ordinal_position column_id,
+            table_name,
+            column_name,
+            data_type column_type,
+            numeric_precision column_precision,
+            numeric_scale column_scale,
+            is_nullable,
+            column_default,
+            column_comment,
+            'mysql' database_id
+        FROM information_schema.columns
+        WHERE table_name=#{tableName, jdbcType=VARCHAR}
+        ORDER BY column_id
     </select>
 </mapper>

@@ -5,11 +5,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.warnier.zhang.gii.Config;
 import org.warnier.zhang.gii.service.SchemaService;
 import org.warnier.zhang.gii.util.PropertiesLoader;
 import org.warnier.zhang.gii.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.warnier.zhang.gii.Config;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayOutputStream;
@@ -220,7 +220,7 @@ public abstract class Generator {
     protected List<Map<String, String>> buildProperties(List<Map<String, Object>> columns) {
         List<Map<String, String>> properties = new ArrayList<Map<String, String>>();
 
-        // 表名
+        // 表名；
         String tableName;
 
         // 字段名称；
@@ -229,24 +229,37 @@ public abstract class Generator {
         // 字段类型；
         String columnType;
 
-        // 字段精度；
-        String columnScale;
+        // 小数位数；
+        int columnScale;
 
         // 字段注释；
         String columnComment;
+
+        // 数据库提供商；
+        String databaseId;
+
+        // 类型转换器；
+        TypeResolver typeResolver = TypeResolver.getTypeResolver();
         for (Map<String, Object> column : columns) {
             tableName = String.valueOf(column.get("tableName"));
             columnName = String.valueOf(column.get("columnName"));
-            columnType = String.valueOf(column.get("dataType"));
-            columnScale = String.valueOf(column.get("dataScale"));
-            columnComment = String.valueOf(column.get("comments"));
+            columnType = String.valueOf(column.get("columnType"));
+            columnScale = 0;
+            if (column.get("columnScale") != null && !StringUtils.isEmpty(String.valueOf(column.get("columnScale")))) {
+                columnScale = Integer.parseInt(String.valueOf(column.get("columnScale")));
+            } else {
+                // 可能存在NUMBER类型数据没有设置小数位！
+                columnScale = -1;
+            }
+            columnComment = String.valueOf(column.get("columnComment"));
+            databaseId = String.valueOf(column.get("databaseId"));
 
             // 构建属性；
             Map<String, String> property = new HashMap<String, String>();
             property.put("tableName", tableName);
             property.put("name", StringUtils.toCamelCase(columnName, "_"));
-            property.put("type", parseJavaType(columnType, columnScale));
-            property.put("jdbcType", parseJdbcType(columnType));
+            property.put("type", typeResolver.parseJavaType(databaseId, columnType, columnScale));
+            property.put("jdbcType", typeResolver.parseJdbcType(databaseId, columnType, columnScale));
             property.put("getter", "get" + StringUtils.toPascalCase(columnName, "_"));
             property.put("setter", "set" + StringUtils.toPascalCase(columnName, "_"));
             property.put("comment", columnComment);
@@ -269,36 +282,6 @@ public abstract class Generator {
             options.put(field, value);
         }
         return options;
-    }
-
-    /**
-     * 解析Java属性类型。
-     *
-     * @param columnType 字段类型；
-     * @param scale      字段精度；
-     * @return
-     */
-    private String parseJavaType(String columnType, String scale) {
-        if (columnType.equals("NUMBER")) {
-            if (StringUtils.isEmpty(scale) || scale.equals("0")) {
-                scale = "0";
-            } else {
-                scale = "1";
-            }
-        } else {
-            scale = "0";
-        }
-        return Config.JAVATYPES.containsKey(columnType + "-" + scale) ? Config.JAVATYPES.get(columnType + "-" + scale) : "String";
-    }
-
-    /**
-     * 解析MyBatis 3 JDBC类型。
-     *
-     * @param columnType 字段类型；
-     * @return
-     */
-    private String parseJdbcType(String columnType) {
-        return Config.JDBCTYPES.containsKey(columnType) ? Config.JDBCTYPES.get(columnType) : "VARCHAR";
     }
 
     /**
@@ -343,7 +326,7 @@ public abstract class Generator {
             } else if (this.action.equals("preview")) {
                 this.results = null;
             }
-        }else{
+        } else {
             this.imports = null;
             this.className = null;
             this.properties = null;
