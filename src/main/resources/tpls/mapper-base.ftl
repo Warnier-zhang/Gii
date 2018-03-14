@@ -1,36 +1,28 @@
 package ${packageName};
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
  * MAPPER接口基类。
  * @param <T>
  */
-public interface Mapper<T> {
+public interface BaseMapper<T> {
     /**
      * 查询一条记录。
      *
-     * @param t
+     * @param id
      * @return
      */
-    T queryOne(T t);
+    T getOne(@Param("id") Integer id);
 
     /**
      * 查询所有记录。
      *
      * @return
      */
-    List<T> queryAll();
-    <#--
-    /**
-     * 查询一组记录。
-     *
-     * @param page
-     * @param rows
-     * @return
-     */
-//    List<T> queryAny(@Param("page") int page, @Param("rows") int rows);
-    -->
+    List<T> getAll();
 
     /**
      * 增加。
@@ -42,9 +34,9 @@ public interface Mapper<T> {
     /**
      * 删除。
      *
-     * @param t
+     * @param id
      */
-    void delete(T t);
+    void delete(@Param("id") Integer id);
 
     /**
      * 更新。
