@@ -167,7 +167,7 @@ public class MapperGenerator extends Generator {
         root.put("domainInstance", domainInstance);
 
         // 构建代码文件；
-        fileWrappers = new ArrayList<FileWrapper>();
+        fileWrappers = new ArrayList<>();
 
         String fileName = className + ".java";
         String filePath = absoluteURL + File.separator + fileName;
@@ -176,7 +176,7 @@ public class MapperGenerator extends Generator {
 
         // 检查是否扩展Mapper接口基类；
         if (options.containsKey("extendsMapper") && options.get("extendsMapper").equals("1")) {
-            fileName = "Mapper.java";
+            fileName = "BaseMapper.java";
             filePath = absoluteURL + File.separator + fileName;
             fileBody = renderText(baseTemplate, root);
             fileWrappers.add(new FileWrapper(fileName, filePath, fileBody));
