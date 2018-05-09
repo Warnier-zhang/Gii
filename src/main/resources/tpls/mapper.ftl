@@ -8,7 +8,7 @@ import ${domainPackageName}.${domainClassName};
 /**
  * 表“${tableName}” 的MAPPER接口。
  */
-public interface ${className} <#if options.extendsMapper == "1">extends Mapper<${domainClassName}></#if> {
+public interface ${className} <#if options.extendsMapper == "1">extends BaseMapper<${domainClassName}></#if> {
 <#if options.extendsMapper == "0">
     /**
      * 查询一条记录。
